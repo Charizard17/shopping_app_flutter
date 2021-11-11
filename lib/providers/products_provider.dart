@@ -90,6 +90,10 @@ class ProductsProvider with ChangeNotifier {
     return [..._items];
   }
 
+  Product findById(String id) {
+    return _items.singleWhere((prod) => prod.id == id, orElse: () => null);
+  }
+
   void addProduct() {
     // _items.add(value);
     notifyListeners();

@@ -15,12 +15,15 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: 'myShop',
         theme: ThemeData(
-          fontFamily: 'Lato',
+          // fonts throw an error...
+          // fontFamily: 'Lato',
           colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.deepPurple)
               .copyWith(secondary: Colors.limeAccent),
         ),
         home: ProductsOverviewScreen(),
-        routes: {ProductDetailScreen.routeName: (ctx) => ProductDetailScreen()},
+        routes: {
+          ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
+        },
       ),
     );
   }
