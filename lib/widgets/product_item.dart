@@ -5,16 +5,6 @@ import '../screens/product_detail_screen.dart';
 import '../providers/product.dart';
 
 class ProductItem extends StatelessWidget {
-  // final String id;
-  // final String title;
-  // final String imageUrl;
-
-  // ProductItem(
-  //   this.id,
-  //   this.title,
-  //   this.imageUrl,
-  // );
-
   @override
   Widget build(BuildContext context) {
     final product = Provider.of<Product>(context);
@@ -35,14 +25,16 @@ class ProductItem extends StatelessWidget {
         ),
         footer: GridTileBar(
           backgroundColor: Colors.black.withOpacity(0.65),
-          leading: IconButton(
-            icon: Icon(
-              product.isFavourite ? Icons.favorite : Icons.favorite_border,
+          leading: Consumer<Product>(
+            builder: (ctx, product, child) => IconButton(
+              icon: Icon(
+                product.isFavourite ? Icons.favorite : Icons.favorite_border,
+              ),
+              onPressed: () {
+                product.toggleFavouriteStatus();
+              },
+              color: Theme.of(context).colorScheme.secondary,
             ),
-            onPressed: () {
-              product.toggleFavouriteStatus();
-            },
-            color: Theme.of(context).colorScheme.secondary,
           ),
           title: Text(
             product.title,
