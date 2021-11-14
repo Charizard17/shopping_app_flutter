@@ -27,6 +27,12 @@ class MyApp extends StatelessWidget {
           // fontFamily: 'Lato', // fonts throw an error...
           primaryColor: Color(0xFF133AAC),
           accentColor: Color(0xFFFFC340),
+          appBarTheme: AppBarTheme(
+              backgroundColor: Color(0xFF133AAC),
+              titleTextStyle: TextStyle(
+                color: Color(0xFFFFC340),
+                fontSize: 20
+              )),
         ),
         home: ProductsOverviewScreen(),
         routes: {
