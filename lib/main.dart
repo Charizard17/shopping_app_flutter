@@ -25,9 +25,8 @@ class MyApp extends StatelessWidget {
         title: 'myShop',
         theme: ThemeData(
           // fontFamily: 'Lato', // fonts throw an error...
-          colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.purple)
-              .copyWith(secondary: Colors.limeAccent),
-
+          primaryColor: Color(0xFF133AAC),
+          accentColor: Color(0xFFFFC340),
         ),
         home: ProductsOverviewScreen(),
         routes: {

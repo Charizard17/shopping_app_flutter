@@ -35,7 +35,7 @@ class ProductItem extends StatelessWidget {
               onPressed: () {
                 product.toggleFavouriteStatus();
               },
-              color: Theme.of(context).colorScheme.secondary,
+              color: Theme.of(context).accentColor,
             ),
           ),
           title: Text(
@@ -47,7 +47,7 @@ class ProductItem extends StatelessWidget {
             onPressed: () {
               cart.addItem(product.id, product.price, product.title);
             },
-            color: Theme.of(context).colorScheme.secondary,
+            color: Theme.of(context).accentColor,
           ),
         ),
       ),
