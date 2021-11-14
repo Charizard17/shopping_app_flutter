@@ -7,6 +7,7 @@ import './providers/orders.dart';
 import './screens/product_detail_screen.dart';
 import './screens/products_overview_screen.dart';
 import './screens/cart_screen.dart';
+import './screens/orders_screen.dart';
 
 void main() => runApp(MyApp());
 
@@ -34,15 +35,14 @@ class MyApp extends StatelessWidget {
           errorColor: Color(0xFFFF1B1C),
           appBarTheme: AppBarTheme(
               backgroundColor: Color(0xFF133AAC),
-              titleTextStyle: TextStyle(
-                color: Color(0xFFFFC340),
-                fontSize: 20
-              )),
+              titleTextStyle:
+                  TextStyle(color: Color(0xFFFFC340), fontSize: 20)),
         ),
         home: ProductsOverviewScreen(),
         routes: {
           ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
           CartScreen.routeName: (ctx) => CartScreen(),
+          OrdersScreen.routeName: (ctx) => OrdersScreen(),
         },
       ),
     );
