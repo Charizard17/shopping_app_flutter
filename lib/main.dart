@@ -27,6 +27,7 @@ class MyApp extends StatelessWidget {
           // fontFamily: 'Lato', // fonts throw an error...
           primaryColor: Color(0xFF133AAC),
           accentColor: Color(0xFFFFC340),
+          errorColor: Color(0xFFFF1B1C),
           appBarTheme: AppBarTheme(
               backgroundColor: Color(0xFF133AAC),
               titleTextStyle: TextStyle(

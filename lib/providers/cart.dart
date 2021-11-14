@@ -30,6 +30,8 @@ class Cart with ChangeNotifier {
     _items.forEach((key, cartItem) {
       total += cartItem.price * cartItem.quantity;
     });
+    String formattedTotal = total.toStringAsFixed(2);
+    total = double.parse(formattedTotal);
     return total;
   }
 
@@ -56,6 +58,11 @@ class Cart with ChangeNotifier {
       );
     }
 
+    notifyListeners();
+  }
+
+  void removeItem(String productId) {
+    _items.remove(productId);
     notifyListeners();
   }
 }
