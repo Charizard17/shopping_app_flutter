@@ -116,11 +116,11 @@ class Products with ChangeNotifier {
   //   notifyListeners();
   // }
 
-  void addProduct(Product product) {
+  Future<void> addProduct(Product product) {
     final url = Uri.https(
         'flutter-shopping-app-f9912-default-rtdb.europe-west1.firebasedatabase.app',
         '/products.json');
-    http
+    return http
         .post(
       url,
       body: json.encode(
@@ -133,20 +133,18 @@ class Products with ChangeNotifier {
         },
       ),
     )
-        .then(
-      (response) {
-        final newProduct = Product(
-          title: product.title,
-          description: product.description,
-          price: product.price,
-          imageUrl: product.imageUrl,
-          id: json.decode(response.body)['name'],
-        );
-        _items.add(newProduct);
-        // _items.insert(0, newProduct); // adds new product at the start of the list
-        notifyListeners();
-      },
-    );
+        .then((response) {
+      final newProduct = Product(
+        title: product.title,
+        description: product.description,
+        price: product.price,
+        imageUrl: product.imageUrl,
+        id: json.decode(response.body)['name'],
+      );
+      _items.add(newProduct);
+      // _items.insert(0, newProduct); // adds new product at the start of the list
+      notifyListeners();
+    });
   }
 
   void updateProduct(String id, Product newProduct) {
