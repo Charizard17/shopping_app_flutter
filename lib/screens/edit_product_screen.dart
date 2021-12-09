@@ -89,27 +89,53 @@ class _EditProductScreenState extends State<EditProductScreen> {
       return;
     }
     _form.currentState.save();
-    setState(() {
-      _isLoading = true;
-    });
+    setState(
+      () {
+        _isLoading = true;
+      },
+    );
     if (_editedProduct.id != null) {
       Provider.of<Products>(context, listen: false).updateProduct(
         _editedProduct.id,
         _editedProduct,
       );
-      setState(() {
-        _isLoading = false;
-      });
+      setState(
+        () {
+          _isLoading = false;
+        },
+      );
       Navigator.of(context).pop();
     } else {
       Provider.of<Products>(context, listen: false)
           .addProduct(_editedProduct)
-          .then((_) {
-        setState(() {
-          _isLoading = false;
-        });
-        Navigator.of(context).pop();
-      });
+          .catchError(
+        (error) {
+          showDialog(
+            context: context,
+            builder: (ctx) => AlertDialog(
+              title: Text('An error occured'),
+              content: Text('Something went wrong'),
+              actions: [
+                TextButton(
+                  child: Text('Okay'),
+                  onPressed: () {
+                    Navigator.of(ctx).pop();
+                  },
+                ),
+              ],
+            ),
+          );
+        },
+      ).then(
+        (_) {
+          setState(
+            () {
+              _isLoading = false;
+            },
+          );
+          Navigator.of(context).pop();
+        },
+      );
     }
     // Navigator.of(context).pop();
   }

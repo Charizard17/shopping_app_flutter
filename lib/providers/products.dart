@@ -118,7 +118,7 @@ class Products with ChangeNotifier {
 
   Future<void> addProduct(Product product) {
     final url = Uri.https(
-        'flutter-shopping-app-f9912-default-rtdb.europe-west1.firebasedatabase.app',
+        'flutter-shopping-app-f9912-default-rtdb.europe-west1.firebasedatabase.ap',
         '/products.json');
     return http
         .post(
@@ -144,6 +144,9 @@ class Products with ChangeNotifier {
       _items.add(newProduct);
       // _items.insert(0, newProduct); // adds new product at the start of the list
       notifyListeners();
+    }).catchError((error) {
+      print(error);
+      throw error;
     });
   }
 
