@@ -22,13 +22,18 @@ class Product with ChangeNotifier {
     this.isFavourite = false,
   });
 
+  void _setFavValue(bool newValue) {
+    isFavourite = newValue;
+    notifyListeners();
+  }
+
   Future<void> toggleFavouriteStatus() async {
     final oldStatus = isFavourite;
     isFavourite = !isFavourite;
     notifyListeners();
-    final url = Uri.https(baseFirebaseUrl, '/products/$id');
+    final url = Uri.https(baseFirebaseUrl, '/products/$id.json');
     try {
-      await http.patch(
+      final response = await http.patch(
         url,
         body: json.encode(
           {
@@ -36,9 +41,11 @@ class Product with ChangeNotifier {
           },
         ),
       );
+      if (response.statusCode >= 400) {
+        _setFavValue(oldStatus);
+      }
     } catch (error) {
-      isFavourite = oldStatus;
-      notifyListeners();
+      _setFavValue(oldStatus);
     }
   }
 }
