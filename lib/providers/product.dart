@@ -31,7 +31,7 @@ class Product with ChangeNotifier {
     final oldStatus = isFavourite;
     isFavourite = !isFavourite;
     notifyListeners();
-    final url = Uri.https(baseFirebaseUrl, '/products/$id.json');
+    final url = Uri.parse('$baseFirebaseUrl/products/$id.json');
     try {
       final response = await http.patch(
         url,

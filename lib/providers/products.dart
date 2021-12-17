@@ -93,12 +93,12 @@ class Products with ChangeNotifier {
     // ),
   ];
 
-  var _showFavouritesOnly = false;
+  // var _showFavouritesOnly = false;
 
   List<Product> get items {
-    if (_showFavouritesOnly) {
-      return _items.where((prodItem) => prodItem.isFavourite).toList();
-    }
+    // if (_showFavouritesOnly) {
+    //   return _items.where((prodItem) => prodItem.isFavourite).toList();
+    // }
     return [..._items];
   }
 
@@ -121,7 +121,7 @@ class Products with ChangeNotifier {
   // }
 
   Future<void> fetchAndSetProducts() async {
-    final url = Uri.https(baseFirebaseUrl, '/products.json');
+    final url = Uri.parse('$baseFirebaseUrl/products.json');
     try {
       final response = await http.get(url);
       final extractedDate = json.decode(response.body) as Map<String, dynamic>;
@@ -151,7 +151,7 @@ class Products with ChangeNotifier {
   }
 
   Future<void> addProduct(Product product) async {
-    final url = Uri.https(baseFirebaseUrl, '/products.json');
+    final url = Uri.parse('$baseFirebaseUrl/products.json');
     try {
       final response = await http.post(
         url,
@@ -184,7 +184,7 @@ class Products with ChangeNotifier {
   Future<void> updateProduct(String id, Product newProduct) async {
     final prodIndex = _items.indexWhere((prod) => prod.id == id);
     if (prodIndex >= 0) {
-      final url = Uri.https(baseFirebaseUrl, '/products/$id.json');
+      final url = Uri.parse('$baseFirebaseUrl/products/$id.json');
       http.patch(url,
           body: json.encode({
             'title': newProduct.title,
@@ -200,7 +200,7 @@ class Products with ChangeNotifier {
   }
 
   Future<void> deleteProduct(String id) async {
-    final url = Uri.https(baseFirebaseUrl, '/products/$id.json');
+    final url = Uri.parse('baseFirebaseUrl/products/$id.json');
     final existingProductIndex = _items.indexWhere(((prod) => prod.id == id));
     var existingProduct = _items[existingProductIndex];
     final response = await http.delete(url);
