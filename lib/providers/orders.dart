@@ -22,7 +22,7 @@ class OrderItem {
 class Orders with ChangeNotifier {
   List<OrderItem> _orders = [];
   static const baseFirebaseUrl =
-      'flutter-shopping-app-f9912-default-rtdb.europe-west1.firebasedatabase.app';
+      'https://flutter-shopping-app-f9912-default-rtdb.europe-west1.firebasedatabase.app';
 
   List<OrderItem> get orders {
     return [..._orders];

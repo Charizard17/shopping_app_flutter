@@ -11,7 +11,7 @@ class Product with ChangeNotifier {
   final String imageUrl;
   bool isFavourite;
   static const baseFirebaseUrl =
-      'flutter-shopping-app-f9912-default-rtdb.europe-west1.firebasedatabase.app';
+      'https://flutter-shopping-app-f9912-default-rtdb.europe-west1.firebasedatabase.app';
 
   Product({
     @required this.id,
