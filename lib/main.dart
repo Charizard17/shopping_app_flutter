@@ -33,26 +33,28 @@ class MyApp extends StatelessWidget {
           create: (ctx) => Orders(),
         )
       ],
-      child: MaterialApp(
-        title: 'myShop',
-        theme: ThemeData(
-          // fontFamily: 'Lato', // fonts throw an error...
-          primaryColor: Color(0xFF133AAC),
-          accentColor: Color(0xFFFFC340),
-          errorColor: Color(0xFFFF1B1C),
-          appBarTheme: AppBarTheme(
-              backgroundColor: Color(0xFF133AAC),
-              titleTextStyle:
-                  TextStyle(color: Color(0xFFFFC340), fontSize: 20)),
+      child: Consumer<Auth>(
+        builder: (ctx, authData, _) => MaterialApp(
+          title: 'myShop',
+          theme: ThemeData(
+            // fontFamily: 'Lato', // fonts throw an error...
+            primaryColor: Color(0xFF133AAC),
+            accentColor: Color(0xFFFFC340),
+            errorColor: Color(0xFFFF1B1C),
+            appBarTheme: AppBarTheme(
+                backgroundColor: Color(0xFF133AAC),
+                titleTextStyle:
+                    TextStyle(color: Color(0xFFFFC340), fontSize: 20)),
+          ),
+          home: authData.isAuth ? ProductsOverviewScreen() : AuthScreen(),
+          routes: {
+            ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
+            CartScreen.routeName: (ctx) => CartScreen(),
+            OrdersScreen.routeName: (ctx) => OrdersScreen(),
+            UserProductsScreen.routeName: (ctx) => UserProductsScreen(),
+            EditProductScreen.routeName: (ctx) => EditProductScreen(),
+          },
         ),
-        home: AuthScreen(),
-        routes: {
-          ProductDetailScreen.routeName: (ctx) => ProductDetailScreen(),
-          CartScreen.routeName: (ctx) => CartScreen(),
-          OrdersScreen.routeName: (ctx) => OrdersScreen(),
-          UserProductsScreen.routeName: (ctx) => UserProductsScreen(),
-          EditProductScreen.routeName: (ctx) => EditProductScreen(),
-        },
       ),
     );
   }
