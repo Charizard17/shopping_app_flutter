@@ -27,11 +27,11 @@ class Product with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> toggleFavouriteStatus() async {
+  Future<void> toggleFavouriteStatus(String authToken) async {
     final oldStatus = isFavourite;
     isFavourite = !isFavourite;
     notifyListeners();
-    final url = Uri.parse('$baseFirebaseUrl/products/$id.json');
+    final url = Uri.parse('$baseFirebaseUrl/products/$id.json?auth=$authToken');
     try {
       final response = await http.patch(
         url,

@@ -154,7 +154,7 @@ class Products with ChangeNotifier {
   }
 
   Future<void> addProduct(Product product) async {
-    final url = Uri.parse('$baseFirebaseUrl/products.json');
+    final url = Uri.parse('$baseFirebaseUrl/products.json?auth=$authToken');
     try {
       final response = await http.post(
         url,
@@ -187,7 +187,8 @@ class Products with ChangeNotifier {
   Future<void> updateProduct(String id, Product newProduct) async {
     final prodIndex = _items.indexWhere((prod) => prod.id == id);
     if (prodIndex >= 0) {
-      final url = Uri.parse('$baseFirebaseUrl/products/$id.json');
+      final url =
+          Uri.parse('$baseFirebaseUrl/products/$id.json?auth=$authToken');
       http.patch(url,
           body: json.encode({
             'title': newProduct.title,
@@ -203,7 +204,7 @@ class Products with ChangeNotifier {
   }
 
   Future<void> deleteProduct(String id) async {
-    final url = Uri.parse('baseFirebaseUrl/products/$id.json');
+    final url = Uri.parse('baseFirebaseUrl/products/$id.json?auth=$authToken');
     final existingProductIndex = _items.indexWhere(((prod) => prod.id == id));
     var existingProduct = _items[existingProductIndex];
     final response = await http.delete(url);
