@@ -124,8 +124,11 @@ class Products with ChangeNotifier {
   //   notifyListeners();
   // }
 
-  Future<void> fetchAndSetProducts() async {
-    var url = Uri.parse('$baseFirebaseUrl/products.json?auth=$authToken');
+  Future<void> fetchAndSetProducts([bool filterByUser = false]) async {
+    final filterString =
+        filterByUser ? 'orderBy="creatorId"&equalTo="$userId"' : '';
+    var url = Uri.parse(
+        '$baseFirebaseUrl/products.json?auth=$authToken&$filterString');
     try {
       final response = await http.get(url);
       final extractedDate = json.decode(response.body) as Map<String, dynamic>;
@@ -145,8 +148,9 @@ class Products with ChangeNotifier {
               title: prodData['title'],
               description: prodData['description'],
               price: prodData['price'],
-              isFavourite:
-                  favouriteData == null ? false : favouriteData[prodId] ?? false,
+              isFavourite: favouriteData == null
+                  ? false
+                  : favouriteData[prodId] ?? false,
               imageUrl: prodData['imageUrl'],
             ),
           );
@@ -170,6 +174,7 @@ class Products with ChangeNotifier {
             'description': product.description,
             'price': product.price,
             'imageUrl': product.imageUrl,
+            'creatorId': userId,
           },
         ),
       );
