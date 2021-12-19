@@ -13,6 +13,7 @@ import './screens/orders_screen.dart';
 import './screens/user_products_screen.dart';
 import './screens/edit_product_screen.dart';
 import './screens/auth_screen.dart';
+import './helpers/custom_route.dart';
 
 void main() => runApp(MyApp());
 
@@ -51,9 +52,15 @@ class MyApp extends StatelessWidget {
             accentColor: Color(0xFFFFC340),
             errorColor: Color(0xFFFF1B1C),
             appBarTheme: AppBarTheme(
-                backgroundColor: Color(0xFF133AAC),
-                titleTextStyle:
-                    TextStyle(color: Color(0xFFFFC340), fontSize: 20)),
+              backgroundColor: Color(0xFF133AAC),
+              titleTextStyle: TextStyle(color: Color(0xFFFFC340), fontSize: 20),
+            ),
+            pageTransitionsTheme: PageTransitionsTheme(
+              builders: {
+                TargetPlatform.android: CustomPageTransitionBuilder(),
+                TargetPlatform.iOS: CustomPageTransitionBuilder(),
+              },
+            ),
           ),
           home: authData.isAuth
               ? ProductsOverviewScreen()
