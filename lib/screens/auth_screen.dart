@@ -123,6 +123,13 @@ class _AuthCardState extends State<AuthCard>
     _heightAnimation.addListener(() => setState(() {}));
   }
 
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    _controller.dispose();
+  }
+
   void _showErrorDialog(String message) {
     showDialog(
       context: context,
